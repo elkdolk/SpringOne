@@ -1,0 +1,1 @@
+&copy; Nader Mirza
