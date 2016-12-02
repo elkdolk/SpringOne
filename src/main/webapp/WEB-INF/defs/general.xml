@@ -10,5 +10,9 @@
 		<put-attribute name="title" value="JBA" />
 		<put-attribute name="body" value="/WEB-INF/jsp/index.jsp" />
 	</definition>
+	<definition name="users" extends="common">
+		<put-attribute name="title" value="JBA" />
+		<put-attribute name="body" value="/WEB-INF/jsp/users.jsp" />
+	</definition>
 
 </tiles-definitions>
