@@ -1,6 +1,5 @@
 package spring.one.org.service;
 
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -35,7 +34,7 @@ public class InitDBService {
 
 	@Autowired
 	private BlogRepository blogRepository;
-	
+
 	@PostConstruct
 	public void init() {
 		Role roleUser = new Role();
@@ -51,7 +50,7 @@ public class InitDBService {
 		userAdmin.setName("admin");
 		//BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		//userAdmin.setPassword(encoder.encode("admin"));
-		userAdmin.setPassword(("admin"));
+		userAdmin.setPassword("admin");
 		
 		List<Role> roles = new ArrayList<Role>();
 		roles.add(roleAdmin);
@@ -80,5 +79,4 @@ public class InitDBService {
 		item2.setPublishedDate(new Date());
 		itemRepository.save(item2);
 	}
-	
 }
