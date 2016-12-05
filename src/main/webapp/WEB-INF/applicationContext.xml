@@ -46,6 +46,6 @@
 
 	<jdbc:embedded-database type="HSQL" id="dataSource" />
 
-
+	<import resource="security.xml"/>
 
 </beans>
