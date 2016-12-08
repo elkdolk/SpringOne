@@ -5,6 +5,10 @@
 
 <form:form commandName="user" cssClass="form-horizontal">
 
+<c:if test="${param.success eq true }">
+	<div class="alert alert-success ">Registration successful</div>
+</c:if>
+
 	<div class="form-group">
 		<label for="name" class="col-sm-2 control-label">Name</label>
 		<div class="col-sm-10">
@@ -26,7 +30,7 @@
 
 	<div class="form-group">
 		<div class="col-sm-2">
-			<button type="submit" value="Save" class="btn btn-lg btn-primary">Sign in</button>
+			<button type="submit" value="Save" class="btn btn-lg btn-primary">Save</button>
 		</div>
 	</div>
 

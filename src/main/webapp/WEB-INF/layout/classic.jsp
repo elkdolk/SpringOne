@@ -1,24 +1,40 @@
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles-extras" prefix="tilesx"  %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="security"  %>
 
 <!DOCTYPE html>
+
+
+
 <head>
+
 <!-- Latest compiled and minified CSS -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<!-- <link rel="stylesheet" -->
+<!-- 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
+
+<!-- <!-- Optional theme --> 
+<!-- <link rel="stylesheet" -->
+<!-- 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"> -->
+
+<!-- <!-- Latest compiled and minified JavaScript --> 
+<!-- <script -->
+<!-- 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
+
+<!-- -------------------------------------------------------------------------------------------------------- -->
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" >
 
 <!-- Optional theme -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css"  >
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+
+<script type="text/javascript" src="http://cdn.jsdelivr.net/jquery.validation/1.15.0/jquery.validate.min.js"></script>
 
 <!-- Latest compiled and minified JavaScript -->
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"  ></script>
 
-<script>
-	src = "https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js">
-</script>
 </head>
 
 <title><tiles:getAsString name="title" /></title>
@@ -30,7 +46,7 @@
 		
 		
 		<!-- Static navbar -->
-      <nav class="navbar navbar-default">
+      <nav class="navbar navbar-inverse">
         <div class="container-fluid">
           <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -44,10 +60,17 @@
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
               <li class="${current == 'index' ? 'active' : '' }"><a href='<spring:url value="/" />'>Home</a></li>
-              <li class="${current == 'users' or current == 'user-detail'  ?  'active' : '' }"><a href='<spring:url value="/users.html" />'>Users</a></li>
+              <security:authorize access="hasRole('ROLE_ADMIN')">
+              		<li class="${current == 'users' or current == 'user-detail'  ?  'active' : '' }"><a href='<spring:url value="/users.html" />'>Users</a></li>
+              </security:authorize>
               <li class="${current == 'register' ?  'active' : '' }"><a href='<spring:url value="/register.html" />'>Register</a></li>
-              <li class="${current == 'login' ?  'active' : '' }"><a href='<spring:url value="/login.html" />'>Login</a></li>
-              
+              <security:authorize access="! isAuthenticated()">
+              		<li class="${current == 'login' ?  'active' : '' }"><a href='<spring:url value="/login.html" />'>Login</a></li>
+              </security:authorize>
+              <security:authorize access="isAuthenticated()">
+              		<li class="${current == 'users' ?  'active' : '' }"><a href='<spring:url value="/account.html" />'>My Account</a></li>
+              		<li ><a href='<spring:url value="/logout" />'>Logout</a></li>
+              </security:authorize>
             </ul>
           </div><!--/.nav-collapse -->
         </div><!--/.container-fluid -->
